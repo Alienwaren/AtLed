@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "NAUKA", "NAUKA\NAUKA.cppproj", "{CEA4E886-5002-4C21-973C-CC7FBEC15356}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEA4E886-5002-4C21-973C-CC7FBEC15356}.Debug|AVR.ActiveCfg = Debug|AVR
+		{CEA4E886-5002-4C21-973C-CC7FBEC15356}.Debug|AVR.Build.0 = Debug|AVR
+		{CEA4E886-5002-4C21-973C-CC7FBEC15356}.Release|AVR.ActiveCfg = Release|AVR
+		{CEA4E886-5002-4C21-973C-CC7FBEC15356}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
