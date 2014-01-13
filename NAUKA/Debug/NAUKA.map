@@ -10,6 +10,8 @@ Discarded input sections
  .bss           0x00000000        0x0 NAUKA.o
  .text          0x00000000        0x0 RedLed.o
  .bss           0x00000000        0x0 RedLed.o
+ .text._ZN6RedLed8lightLedEv
+                0x00000000       0x5c RedLed.o
  .text._ZN6RedLedD2Ev
                 0x00000000        0x2 RedLed.o
  .text          0x00000000        0x0 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
@@ -142,7 +144,7 @@ LOAD f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x390
+.text           0x00000000      0x10a
  *(.vectors)
  .vectors       0x00000000       0x54 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vector_default
@@ -217,23 +219,20 @@ LOAD f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib
                 0x00000068                __vector_20
                 0x0000006c                . = ALIGN (0x2)
  *(.text.*)
- .text.main     0x0000006c       0x2e NAUKA.o
+ .text.main     0x0000006c       0x2c NAUKA.o
                 0x0000006c                main
  .text._ZN6RedLedC2Ev
-                0x0000009a       0x10 RedLed.o
-                0x0000009a                _ZN6RedLedC2Ev
-                0x0000009a                _ZN6RedLedC1Ev
+                0x00000098       0x10 RedLed.o
+                0x00000098                _ZN6RedLedC2Ev
+                0x00000098                _ZN6RedLedC1Ev
  .text._ZN6RedLed4initEic
-                0x000000aa      0x16c RedLed.o
-                0x000000aa                _ZN6RedLed4initEic
- .text._ZN6RedLed8lightLedEv
-                0x00000216      0x176 RedLed.o
-                0x00000216                _ZN6RedLed8lightLedEv
-                0x0000038c                . = ALIGN (0x2)
+                0x000000a8       0x5e RedLed.o
+                0x000000a8                _ZN6RedLed4initEic
+                0x00000106                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000038c        0x0 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
-                0x0000038c                _exit
-                0x0000038c                exit
+ .fini9         0x00000106        0x0 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+                0x00000106                _exit
+                0x00000106                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -252,11 +251,11 @@ LOAD f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000038c        0x4 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000106        0x4 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000390                _etext = .
+                0x0000010a                _etext = .
 
-.data           0x00800060        0x0 load address 0x00000390
+.data           0x00800060        0x0 load address 0x0000010a
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm16.o
@@ -277,8 +276,8 @@ LOAD f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib
  *(.bss*)
  *(COMMON)
                 0x00800060                PROVIDE (__bss_end, .)
-                0x00000390                __data_load_start = LOADADDR (.data)
-                0x00000390                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000010a                __data_load_start = LOADADDR (.data)
+                0x0000010a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800060        0x0
                 0x00800060                PROVIDE (__noinit_start, .)
@@ -354,21 +353,21 @@ LOAD f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x479
+.debug_info     0x00000000      0x45e
  *(.debug_info)
- .debug_info    0x00000000      0x1f7 NAUKA.o
- .debug_info    0x000001f7      0x282 RedLed.o
+ .debug_info    0x00000000      0x1de NAUKA.o
+ .debug_info    0x000001de      0x280 RedLed.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x2ac
+.debug_abbrev   0x00000000      0x276
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x12a NAUKA.o
- .debug_abbrev  0x0000012a      0x182 RedLed.o
+ .debug_abbrev  0x00000000      0x11d NAUKA.o
+ .debug_abbrev  0x0000011d      0x159 RedLed.o
 
-.debug_line     0x00000000      0x14c
+.debug_line     0x00000000       0xed
  *(.debug_line)
- .debug_line    0x00000000       0x4e NAUKA.o
- .debug_line    0x0000004e       0xfe RedLed.o
+ .debug_line    0x00000000       0x4f NAUKA.o
+ .debug_line    0x0000004f       0x9e RedLed.o
 
 .debug_frame    0x00000000       0x88
  *(.debug_frame)
@@ -382,10 +381,10 @@ LOAD f:/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr8-gnu-toolchain/bin/../lib
  .debug_str     0x0000011a       0x3d RedLed.o
                                 0x190 (size before relaxing)
 
-.debug_loc      0x00000000      0x260
+.debug_loc      0x00000000       0xe0
  *(.debug_loc)
  .debug_loc     0x00000000       0x48 NAUKA.o
- .debug_loc     0x00000048      0x218 RedLed.o
+ .debug_loc     0x00000048       0x98 RedLed.o
 
 .debug_macinfo
  *(.debug_macinfo)
