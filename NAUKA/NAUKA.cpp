@@ -16,6 +16,8 @@ int main(void)
 {
 	
 	RedLed redLed1;
+	RedLed redLed2;
+	redLed2.init(1, 'C');
 	redLed1.init(6, 'C');
 	int bitmask = 0b00000001;
     while(1)
@@ -28,8 +30,10 @@ int main(void)
 		*
 		*/
 		redLed1.lightLed(); ///DZIA£A!
+		redLed2.lightLed();
 		_delay_ms(1000);
-		redLed.turnOff();
+		redLed1.turnOff();
+		redLed2.turnOff();
 		_delay_ms(1000);
     }
 }

@@ -85,6 +85,9 @@ void RedLed::lightLed()
 				PORTC = (bitmask<<6);
 			}
 			break;
+			default:
+			PORTC = 0b00000000;
+			break;
 		}
 		MledState = 1;
 	}
