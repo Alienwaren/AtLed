@@ -9,7 +9,8 @@
 #ifndef __REDLED_H__
 #define __REDLED_H__
 #include <avr/io.h>
-
+namespace LED
+{
 class RedLed
 {
 //variables
@@ -25,6 +26,7 @@ public:
 	void lightLed(); ///zapalenie diody;
 	void init(int pinNumber, char portLetter); /// inicjacja pinu
 	void turnOffLed(); ///wy³¹czenie diody
+	//void blink(int delayLenght); ///mryganie
 	~RedLed();
 protected:
 private:
@@ -32,5 +34,5 @@ private:
 	RedLed& operator=( const RedLed &c );
 
 }; //RedLed
-
+}
 #endif //__REDLED_H__

@@ -7,7 +7,7 @@
 
 
 #include "RedLed.h"
-
+namespace LED;
 // default constructor
 RedLed::RedLed()
 	:
@@ -25,8 +25,158 @@ void RedLed::lightLed()
 	int bitmask = 0b00000001;
 		switch (MportLetter)
 		{
+		case 'A':
+			if(MpinNumber = 1)
+			{
+				PORTC = bitmask;
+			}
+			if(MpinNumber = 2)
+			{
+				PORTC = (bitmask<<1);
+			}
+			if(MpinNumber = 3)
+			{
+				PORTC = (bitmask<<2);
+			}
+			if(MpinNumber = 4)
+			{
+				PORTC = (bitmask<<3);
+			}
+			if(MpinNumber = 5)
+			{
+				PORTC = (bitmask<<4);
+			}
+			if(MpinNumber = 6)
+			{
+				PORTC = (bitmask<<5);
+			}
+			if(MpinNumber = 7)
+			{
+				PORTC = (bitmask<<6);
+			}
+			break;
+		case 'B':
+			if(MpinNumber = 1)
+			{
+				PORTC = bitmask;
+			}
+			if(MpinNumber = 2)
+			{
+				PORTC = (bitmask<<1);
+			}
+			if(MpinNumber = 3)
+			{
+				PORTC = (bitmask<<2);
+			}
+			if(MpinNumber = 4)
+			{
+				PORTC = (bitmask<<3);
+			}
+			if(MpinNumber = 5)
+			{
+				PORTC = (bitmask<<4);
+			}
+			if(MpinNumber = 6)
+			{
+				PORTC = (bitmask<<5);
+			}
+			if(MpinNumber = 7)
+			{
+				PORTC = (bitmask<<6);
+			}
+			break;
 			case 'C':
 			if(MpinNumber = 1)
+			{
+				PORTC = bitmask;
+			}
+			if(MpinNumber = 2)
+			{
+				PORTC = (bitmask<<1);
+			}
+			if(MpinNumber = 3)
+			{
+				PORTC = (bitmask<<2);
+			}
+			if(MpinNumber = 4)
+			{
+				PORTC = (bitmask<<3);
+			}
+			if(MpinNumber = 5)
+			{
+				PORTC = (bitmask<<4);
+			}
+			if(MpinNumber = 6)
+			{
+				PORTC = (bitmask<<5);
+			}
+			if(MpinNumber = 7)
+			{
+				PORTC = (bitmask<<6);
+			}
+			break;
+			case 'D':
+				if(MpinNumber = 1)
+			{
+				PORTC = bitmask;
+			}
+			if(MpinNumber = 2)
+			{
+				PORTC = (bitmask<<1);
+			}
+			if(MpinNumber = 3)
+			{
+				PORTC = (bitmask<<2);
+			}
+			if(MpinNumber = 4)
+			{
+				PORTC = (bitmask<<3);
+			}
+			if(MpinNumber = 5)
+			{
+				PORTC = (bitmask<<4);
+			}
+			if(MpinNumber = 6)
+			{
+				PORTC = (bitmask<<5);
+			}
+			if(MpinNumber = 7)
+			{
+				PORTC = (bitmask<<6);
+			}
+			break;
+			case 'a':
+				if(MpinNumber = 1)
+			{
+				PORTC = bitmask;
+			}
+			if(MpinNumber = 2)
+			{
+				PORTC = (bitmask<<1);
+			}
+			if(MpinNumber = 3)
+			{
+				PORTC = (bitmask<<2);
+			}
+			if(MpinNumber = 4)
+			{
+				PORTC = (bitmask<<3);
+			}
+			if(MpinNumber = 5)
+			{
+				PORTC = (bitmask<<4);
+			}
+			if(MpinNumber = 6)
+			{
+				PORTC = (bitmask<<5);
+			}
+			if(MpinNumber = 7)
+			{
+				PORTC = (bitmask<<6);
+			}
+			break;
+			case 'b':
+				if(MpinNumber = 1)
 			{
 				PORTC = bitmask;
 			}
@@ -85,6 +235,36 @@ void RedLed::lightLed()
 				PORTC = (bitmask<<6);
 			}
 			break;
+			case 'd':
+			if(MpinNumber = 1)
+			{
+				PORTC = bitmask;
+			}
+			if(MpinNumber = 2)
+			{
+				PORTC = (bitmask<<1);
+			}
+			if(MpinNumber = 3)
+			{
+				PORTC = (bitmask<<2);
+			}
+			if(MpinNumber = 4)
+			{
+				PORTC = (bitmask<<3);
+			}
+			if(MpinNumber = 5)
+			{
+				PORTC = (bitmask<<4);
+			}
+			if(MpinNumber = 6)
+			{
+				PORTC = (bitmask<<5);
+			}
+			if(MpinNumber = 7)
+			{
+				PORTC = (bitmask<<6);
+			}
+				break;
 			default:
 			PORTC = 0b00000000;
 			break;
