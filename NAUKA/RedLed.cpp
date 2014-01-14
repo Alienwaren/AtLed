@@ -16,145 +16,84 @@ RedLed::RedLed()
 } //RedLed
 void RedLed::init(int pinNumber, char portLetter)
 {
+	int DDRC = 0x225
 	MpinNumber = pinNumber;
 	MportLetter = portLetter;
-	//inicjacja pinu na wyjœcie
-	switch (MportLetter)
-	{
-		case 'C':
-			if(MpinNumber = 1)
-			{
-				DDRC = 0x1;
-			}
-			if(MpinNumber = 2)
-			{
-				DDRC = 0x2;
-			}
-			if(MpinNumber = 3)
-			{
-				DDRC = 0x4;
-			}
-			if(MpinNumber = 4)
-			{
-				DDRC = 0x8;
-			}
-			if(MpinNumber = 5)
-			{
-				DDRC = 0x10;
-			}
-			if(MpinNumber = 6)
-			{
-				DDRC = 0x40;
-			}
-			if(MpinNumber = 7)
-			{
-				DDRC = 0x80;
-			}
-		break;
-
-
-	
-		case 'c':
-			if(MpinNumber = 1)
-			{
-				DDRC = 0x1;
-			}
-			if(MpinNumber = 2)
-			{
-				DDRC = 0x2;
-			}
-			if(MpinNumber = 3)
-			{
-				DDRC = 0x4;
-			}
-			if(MpinNumber = 4)
-			{
-				DDRC = 0x8;
-			}
-			if(MpinNumber = 5)
-			{
-				DDRC = 0x10;
-			}
-			if(MpinNumber = 6)
-			{
-				DDRC = 0x40;
-			}
-			if(MpinNumber = 7)
-			{
-				DDRC = 0x80;
-			}	
-		break;
-
-
-	}
 }
 void RedLed::lightLed()
 {
+	int bitmask = 0b00000001;
 		switch (MportLetter)
 		{
 			case 'C':
 			if(MpinNumber = 1)
 			{
-				DDRC = 0x1;
+				PORTC = bitmask;
 			}
 			if(MpinNumber = 2)
 			{
-				DDRC = 0x2;
+				PORTC = (bitmask<<1);
 			}
 			if(MpinNumber = 3)
 			{
-				DDRC = 0x4;
+				PORTC = (bitmask<<2);
 			}
 			if(MpinNumber = 4)
 			{
-				DDRC = 0x8;
+				PORTC = (bitmask<<3);
 			}
 			if(MpinNumber = 5)
 			{
-				DDRC = 0x10;
+				PORTC = (bitmask<<4);
 			}
 			if(MpinNumber = 6)
 			{
-				PORTC = 0x40;
+				PORTC = (bitmask<<5);
 			}
 			if(MpinNumber = 7)
 			{
-				DDRC = 0x40;
+				PORTC = (bitmask<<6);
 			}
 			break;
 			case 'c':
 			if(MpinNumber = 1)
 			{
-				DDRC = 0x1;
+				PORTC = bitmask;
 			}
 			if(MpinNumber = 2)
 			{
-				DDRC = 0x2;
+				PORTC = (bitmask<<1);
 			}
 			if(MpinNumber = 3)
 			{
-				DDRC = 0x4;
+				PORTC = (bitmask<<2);
 			}
 			if(MpinNumber = 4)
 			{
-				DDRC = 0x8;
+				PORTC = (bitmask<<3);
 			}
 			if(MpinNumber = 5)
 			{
-				DDRC = 0x10;
+				PORTC = (bitmask<<4);
 			}
 			if(MpinNumber = 6)
 			{
-				PORTC = 0x40;
+				PORTC = (bitmask<<5);
 			}
 			if(MpinNumber = 7)
 			{
-				DDRC = 0x80;
+				PORTC = (bitmask<<6);
 			}
 			break;
 		}
+		MledState = 1;
 	}
 // default destructor
+RedLed::turnOffLed()
+{
+	PORTC = 0b00000000;
+	MledState = 0;
+}
 RedLed::~RedLed()
 {
 } //~RedLed

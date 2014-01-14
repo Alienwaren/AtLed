@@ -24,6 +24,7 @@ public:
 	RedLed();
 	void lightLed(); ///zapalenie diody;
 	void init(int pinNumber, char portLetter); /// inicjacja pinu
+	void turnOffLed(); ///wy³¹czenie diody
 	~RedLed();
 protected:
 private:
