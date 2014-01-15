@@ -120,7 +120,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ALedPattern.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ALedPattern.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="LED.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LedPattern.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="NAUKA.cpp">
