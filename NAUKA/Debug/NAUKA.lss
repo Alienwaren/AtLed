@@ -3,31 +3,31 @@ NAUKA.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000000be  00000000  00000000  00000074  2**1
+  0 .text         000000f0  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  000000be  00000132  2**0
+  1 .data         00000000  00800060  000000f0  00000164  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .stab         000006cc  00000000  00000000  00000134  2**2
+  2 .stab         000006cc  00000000  00000000  00000164  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      00000097  00000000  00000000  00000800  2**0
+  3 .stabstr      00000097  00000000  00000000  00000830  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .comment      0000002f  00000000  00000000  00000897  2**0
+  4 .comment      0000002f  00000000  00000000  000008c7  2**0
                   CONTENTS, READONLY
-  5 .debug_aranges 00000078  00000000  00000000  000008c6  2**0
+  5 .debug_aranges 00000080  00000000  00000000  000008f6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000006ad  00000000  00000000  0000093e  2**0
+  6 .debug_info   000006f1  00000000  00000000  00000976  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000348  00000000  00000000  00000feb  2**0
+  7 .debug_abbrev 00000355  00000000  00000000  00001067  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000025e  00000000  00000000  00001333  2**0
+  8 .debug_line   0000027b  00000000  00000000  000013bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000cc  00000000  00000000  00001594  2**2
+  9 .debug_frame  000000dc  00000000  00000000  00001638  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000002f7  00000000  00000000  00001660  2**0
+ 10 .debug_str    00000319  00000000  00000000  00001714  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000002ab  00000000  00000000  00001957  2**0
+ 11 .debug_loc    000003a1  00000000  00000000  00001a2d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000058  00000000  00000000  00001c02  2**0
+ 12 .debug_ranges 00000060  00000000  00000000  00001dce  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -73,93 +73,143 @@ void ALedPattern::setParams(int setBitMask, int setAmountBlink, char setWillEndL
   5a:	d4 e0       	ldi	r29, 0x04	; 4
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
-  60:	0e 94 54 00 	call	0xa8	; 0xa8 <main>
-  64:	0c 94 5d 00 	jmp	0xba	; 0xba <_exit>
+  60:	0e 94 6f 00 	call	0xde	; 0xde <main>
+  64:	0c 94 76 00 	jmp	0xec	; 0xec <_exit>
 
 00000068 <__bad_interrupt>:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 0000006c <_ZN3LED11blinkNormalEiic>:
-}
+*
+*/
 
 void blinkNormal(int bitMask, int howMuchBlink, char willStop)
 {
+	wdt_disable();
+  6c:	28 e1       	ldi	r18, 0x18	; 24
+  6e:	0f b6       	in	r0, 0x3f	; 63
+  70:	f8 94       	cli
+  72:	21 bd       	out	0x21, r18	; 33
+  74:	11 bc       	out	0x21, r1	; 33
+  76:	0f be       	out	0x3f, r0	; 63
 	int actualBlink = 0;
-	PORTC = bitMask;
-  6c:	85 bb       	out	0x15, r24	; 21
+  78:	20 e0       	ldi	r18, 0x00	; 0
+  7a:	30 e0       	ldi	r19, 0x00	; 0
+	while(true)
+	{
+		PORTC = bitMask + 2;
+  7c:	f8 2f       	mov	r31, r24
+  7e:	fe 5f       	subi	r31, 0xFE	; 254
+		_delay_ms(1000);
+		PORTC = !bitMask;
+  80:	e1 e0       	ldi	r30, 0x01	; 1
+  82:	a0 e0       	ldi	r26, 0x00	; 0
+		_delay_ms(1000);
+		actualBlink++;
+
+			if(actualBlink == howMuchBlink)
+			{
+				if(willStop == 'Y' || willStop == 'y')
+  84:	c6 2f       	mov	r28, r22
+  86:	b7 2f       	mov	r27, r23
+  88:	02 c0       	rjmp	.+4      	; 0x8e <_ZN3LED11blinkNormalEiic+0x22>
+  8a:	2c 2f       	mov	r18, r28
+  8c:	3b 2f       	mov	r19, r27
+{
+	wdt_disable();
+	int actualBlink = 0;
+	while(true)
+	{
+		PORTC = bitMask + 2;
+  8e:	f5 bb       	out	0x15, r31	; 21
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  6e:	2f e3       	ldi	r18, 0x3F	; 63
-  70:	8d e0       	ldi	r24, 0x0D	; 13
-  72:	93 e0       	ldi	r25, 0x03	; 3
-  74:	21 50       	subi	r18, 0x01	; 1
-  76:	80 40       	sbci	r24, 0x00	; 0
-  78:	90 40       	sbci	r25, 0x00	; 0
-  7a:	e1 f7       	brne	.-8      	; 0x74 <_ZN3LED11blinkNormalEiic+0x8>
-  7c:	00 c0       	rjmp	.+0      	; 0x7e <_ZN3LED11blinkNormalEiic+0x12>
-  7e:	00 00       	nop
-	_delay_ms(1000);
-	PORTC = PORTC | 1;
-  80:	a8 9a       	sbi	0x15, 0	; 21
-  82:	2f e3       	ldi	r18, 0x3F	; 63
-  84:	8d e0       	ldi	r24, 0x0D	; 13
-  86:	93 e0       	ldi	r25, 0x03	; 3
-  88:	21 50       	subi	r18, 0x01	; 1
-  8a:	80 40       	sbci	r24, 0x00	; 0
-  8c:	90 40       	sbci	r25, 0x00	; 0
-  8e:	e1 f7       	brne	.-8      	; 0x88 <_ZN3LED11blinkNormalEiic+0x1c>
-  90:	00 c0       	rjmp	.+0      	; 0x92 <_ZN3LED11blinkNormalEiic+0x26>
-  92:	00 00       	nop
-	_delay_ms(1000);
-	actualBlink++;
-	while(true)
-	{
+  90:	1f e3       	ldi	r17, 0x3F	; 63
+  92:	5d e0       	ldi	r21, 0x0D	; 13
+  94:	d3 e0       	ldi	r29, 0x03	; 3
+  96:	11 50       	subi	r17, 0x01	; 1
+  98:	50 40       	sbci	r21, 0x00	; 0
+  9a:	d0 40       	sbci	r29, 0x00	; 0
+  9c:	e1 f7       	brne	.-8      	; 0x96 <_ZN3LED11blinkNormalEiic+0x2a>
+  9e:	00 c0       	rjmp	.+0      	; 0xa0 <_ZN3LED11blinkNormalEiic+0x34>
+  a0:	00 00       	nop
+		_delay_ms(1000);
+		PORTC = !bitMask;
+  a2:	5e 2f       	mov	r21, r30
+  a4:	00 97       	sbiw	r24, 0x00	; 0
+  a6:	09 f0       	breq	.+2      	; 0xaa <_ZN3LED11blinkNormalEiic+0x3e>
+  a8:	5a 2f       	mov	r21, r26
+  aa:	55 bb       	out	0x15, r21	; 21
+  ac:	1f e3       	ldi	r17, 0x3F	; 63
+  ae:	5d e0       	ldi	r21, 0x0D	; 13
+  b0:	d3 e0       	ldi	r29, 0x03	; 3
+  b2:	11 50       	subi	r17, 0x01	; 1
+  b4:	50 40       	sbci	r21, 0x00	; 0
+  b6:	d0 40       	sbci	r29, 0x00	; 0
+  b8:	e1 f7       	brne	.-8      	; 0xb2 <_ZN3LED11blinkNormalEiic+0x46>
+  ba:	00 c0       	rjmp	.+0      	; 0xbc <_ZN3LED11blinkNormalEiic+0x50>
+  bc:	00 00       	nop
+		_delay_ms(1000);
+		actualBlink++;
+  be:	2f 5f       	subi	r18, 0xFF	; 255
+  c0:	3f 4f       	sbci	r19, 0xFF	; 255
+
 			if(actualBlink == howMuchBlink)
-  94:	61 30       	cpi	r22, 0x01	; 1
-  96:	71 05       	cpc	r23, r1
-  98:	31 f4       	brne	.+12     	; 0xa6 <_ZN3LED11blinkNormalEiic+0x3a>
+  c2:	26 17       	cp	r18, r22
+  c4:	37 07       	cpc	r19, r23
+  c6:	19 f7       	brne	.-58     	; 0x8e <_ZN3LED11blinkNormalEiic+0x22>
 			{
 				if(willStop == 'Y' || willStop == 'y')
-  9a:	49 35       	cpi	r20, 0x59	; 89
-  9c:	11 f0       	breq	.+4      	; 0xa2 <_ZN3LED11blinkNormalEiic+0x36>
-  9e:	49 37       	cpi	r20, 0x79	; 121
-  a0:	c9 f7       	brne	.-14     	; 0x94 <_ZN3LED11blinkNormalEiic+0x28>
+  c8:	49 35       	cpi	r20, 0x59	; 89
+  ca:	11 f0       	breq	.+4      	; 0xd0 <_ZN3LED11blinkNormalEiic+0x64>
+  cc:	49 37       	cpi	r20, 0x79	; 121
+  ce:	e9 f6       	brne	.-70     	; 0x8a <_ZN3LED11blinkNormalEiic+0x1e>
 				{
 					while (1)
 					{
 						PORTC = 0x0;
-  a2:	15 ba       	out	0x15, r1	; 21
-  a4:	fe cf       	rjmp	.-4      	; 0xa2 <_ZN3LED11blinkNormalEiic+0x36>
-  a6:	ff cf       	rjmp	.-2      	; 0xa6 <_ZN3LED11blinkNormalEiic+0x3a>
+  d0:	15 ba       	out	0x15, r1	; 21
+  d2:	fe cf       	rjmp	.-4      	; 0xd0 <_ZN3LED11blinkNormalEiic+0x64>
 
-000000a8 <main>:
+000000d4 <_Z4initv>:
 #include "LED.h"
-int main(void)
+int init()
 {
 	int dataC = 0b11111111;
 	int bitmask = 0b00000001;
 	DDRC = dataC;
-  a8:	8f ef       	ldi	r24, 0xFF	; 255
-  aa:	84 bb       	out	0x14, r24	; 20
+  d4:	8f ef       	ldi	r24, 0xFF	; 255
+  d6:	84 bb       	out	0x14, r24	; 20
+	return bitmask;
+}
+  d8:	81 e0       	ldi	r24, 0x01	; 1
+  da:	90 e0       	ldi	r25, 0x00	; 0
+  dc:	08 95       	ret
+
+000000de <main>:
+
+int main(void)
+{
+	
+	int bitmaskMain = init();
+  de:	0e 94 6a 00 	call	0xd4	; 0xd4 <_Z4initv>
 	
     while(1)
     {
 		//LED::blink(bitmask, 2, 'n');
 		//_delay_ms(1000);
-		LED::blinkNormal(bitmask, 2, 'y');
-  ac:	49 e7       	ldi	r20, 0x79	; 121
-  ae:	62 e0       	ldi	r22, 0x02	; 2
-  b0:	70 e0       	ldi	r23, 0x00	; 0
-  b2:	81 e0       	ldi	r24, 0x01	; 1
-  b4:	90 e0       	ldi	r25, 0x00	; 0
-  b6:	0e 94 36 00 	call	0x6c	; 0x6c <_ZN3LED11blinkNormalEiic>
+		LED::blinkNormal(bitmaskMain, 3, 'y');
+  e2:	49 e7       	ldi	r20, 0x79	; 121
+  e4:	63 e0       	ldi	r22, 0x03	; 3
+  e6:	70 e0       	ldi	r23, 0x00	; 0
+  e8:	0e 94 36 00 	call	0x6c	; 0x6c <_ZN3LED11blinkNormalEiic>
 
-000000ba <_exit>:
-  ba:	f8 94       	cli
+000000ec <_exit>:
+  ec:	f8 94       	cli
 
-000000bc <__stop_program>:
-  bc:	ff cf       	rjmp	.-2      	; 0xbc <__stop_program>
+000000ee <__stop_program>:
+  ee:	ff cf       	rjmp	.-2      	; 0xee <__stop_program>
