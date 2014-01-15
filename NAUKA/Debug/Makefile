@@ -36,8 +36,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../NAUKA.cpp \
-../RedLed.cpp
+../NAUKA.cpp
 
 
 PREPROCESSING_SRCS += 
@@ -47,20 +46,16 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-NAUKA.o \
-RedLed.o
+NAUKA.o
 
 OBJS_AS_ARGS +=  \
-NAUKA.o \
-RedLed.o
+NAUKA.o
 
 C_DEPS +=  \
-NAUKA.d \
-RedLed.d
+NAUKA.d
 
 C_DEPS_AS_ARGS +=  \
-NAUKA.d \
-RedLed.d
+NAUKA.d
 
 OUTPUT_FILE_PATH +=NAUKA.elf
 
@@ -73,8 +68,6 @@ OUTPUT_FILE_DEP:= ./makedep.mk
 LIB_DEP+= 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

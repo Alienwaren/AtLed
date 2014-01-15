@@ -1,4 +1,4 @@
-NAUKA.d NAUKA.o: .././NAUKA.cpp \
+NAUKA.d NAUKA.o: .././NAUKA.cpp .././LED.h \
  f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/io.h \
  f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/sfr_defs.h \
  f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/inttypes.h \
@@ -12,8 +12,9 @@ NAUKA.d NAUKA.o: .././NAUKA.cpp \
  f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/lock.h \
  f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/util/delay.h \
  f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/util/delay_basic.h \
- f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/math.h \
- .././RedLed.h
+ f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/math.h
+
+.././LED.h:
 
 f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/avr/io.h:
 
@@ -42,5 +43,3 @@ f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gc
 f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/util/delay_basic.h:
 
 f:\atmel\ toolchain\avr8\ gcc\native\3.4.2.1002\avr8-gnu-toolchain\bin\../lib/gcc/avr/4.7.2/../../../../avr/include/math.h:
-
-.././RedLed.h:

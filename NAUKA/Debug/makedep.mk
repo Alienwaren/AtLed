@@ -4,5 +4,3 @@
 
 NAUKA.cpp
 
-RedLed.cpp
-
