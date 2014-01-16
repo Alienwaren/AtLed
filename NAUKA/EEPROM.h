@@ -11,7 +11,7 @@
 #include <avr/io.h>
 namespace EEPROM
 {
-	int EEMEM initialSpeed;
+	int EEMEM initialSpeed = 1;
 	/*
 	 * Method will set blinking speed and will write it too eeprom
 	 * 1 - 1s; 2 - 2s etc.
@@ -23,8 +23,20 @@ namespace EEPROM
 		int tempSpeed = speedToBeSet;
 		
 		///TODO: WRITING TO EEPROM
-	}
+		eeprom_write_byte(0, tempSpeed);
+	}	
 	
+	/*
+	 * Method will get blinking speed from EEPROM.
+	 * 1 - 1s; 2 - 2s etc.
+	 * Returns blinking speed integer
+	 * 
+	 */
+	int getBlinkingSpeed()
+	{
+		int tempSpeed = eeprom_read_byte(0);
+		return tempSpeed;
+	}
 	
 }
 
