@@ -11,17 +11,6 @@
 #include <avr/wdt.h>
 #ifndef LED_H_
 #define LED_H_
-#define 	wdt_reset()   __asm__ __volatile__ ("wdr")
-#define 	WDTO_15MS   0
-#define 	WDTO_30MS   1
-#define 	WDTO_60MS   2
-#define 	WDTO_120MS   3
-#define 	WDTO_250MS   4
-#define 	WDTO_500MS   5
-#define 	WDTO_1S   6
-#define 	WDTO_2S   7
-#define 	WDTO_4S   8
-#define 	WDTO_8S	  9
 /*
 *Method will blink the led with desired pattern. 
 *Bitmask = starting value for led blinking
@@ -35,7 +24,6 @@ namespace LED
 	
 void blink(int bitMask, int howMuchBlink, char willStop)
 {
-	wdt_disable();
 	int actualBlink = 0;
 		while(true)
 		{
@@ -83,7 +71,6 @@ void blink(int bitMask, int howMuchBlink, char willStop)
 
 void blinkNormal(int bitMask, int howMuchBlink, char willStop)
 {
-	wdt_disable();
 	int actualBlink = 0;
 	while(true)
 	{
@@ -117,6 +104,61 @@ void blinkNormal(int bitMask, int howMuchBlink, char willStop)
 			
 }
 
-}
 
+/*
+*Method will blink one led
+*Bitmask = starting value for led blinking
+*howMuchBlink = amount of "blinks"
+*willStop = will ever blinking stop?
+*
+*
+*/
+void lightOne(int withDiode, int startingBitmask, int howMuchWillBlink, char willStop)
+{
+	int actualBlink = 0;
+	while(true)
+	{
+		if(withDiode == 1)
+		{
+			PORTC = startingBitmask;
+		}else if(withDiode == 2)
+		{
+			PORTC = (startingBitmask<<1);
+		}else
+		{
+			PORTC = 0x0;
+		}
+
+			if(actualBlink == howMuchBlink)
+			{
+				if(willStop == 'Y' || willStop == 'y')
+				{
+					while (1)
+					{
+						PORTC = 0x0;
+						
+					}
+				}else if (willStop == 'n' || willStop == 'N')
+				{
+					continue;
+					
+				}
+				else
+				{
+					continue;
+				
+				}
+				}
+			
+}
+/*
+*Method will stop led blinking
+*
+*
+*/
+void stopBlinking()
+{
+	PORTC = 0x0;
+}
+}
 #endif /* LED_H_ */
