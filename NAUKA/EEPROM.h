@@ -9,6 +9,7 @@
 #define EEPROM_H_
 #include <avr/eeprom.h>
 #include <avr/io.h>
+#include <avr/ctype.h>
 namespace EEPROM
 {
 	int EEMEM initialSpeed = 1;
@@ -21,9 +22,19 @@ namespace EEPROM
 	void setBlinkingSpeed(int speedToBeSet)
 	{
 		int tempSpeed = speedToBeSet;
-		
-		///TODO: WRITING TO EEPROM
-		eeprom_write_byte(0, tempSpeed);
+		/*
+		Check that input is not an letter.
+		*/
+		if(isdigit(tempSpeed))
+		{
+			eeprom_write_byte(0, tempSpeed);
+			_delay_ms(5000); //for stability and for preserving eeprom lifetime
+		}
+		else
+		{
+			return;
+		}
+	
 	}	
 	
 	/*
@@ -35,8 +46,10 @@ namespace EEPROM
 	int getBlinkingSpeed()
 	{
 		int tempSpeed = eeprom_read_byte(0);
+		_delay_ms(5000); //for stability and for preserving eeprom lifetime
 		return tempSpeed;
 	}
+
 	
 }
 

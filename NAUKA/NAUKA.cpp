@@ -12,24 +12,35 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "LED.h"
+#include "EEPROM.h"
 int init()
 {
-	int dataC = 0b11111111;
-	int bitmask = 0b00000001;
-	DDRC = dataC;
-	return bitmask;
+	struct returnValues
+	{
+		int blinkingSpeed; ///to be read from EEPROM
+		int bitmask; 
+	}eepromSpeedBitmask;
+	eepromSpeedDataC.blinkingSpeed = getBlinkingSpeed();
+	eepromSpeedDataC.Bitmask = 0b00000001;
+	DDRC = 0b11111111;
+	return eepromSpeedDataC;
 }
 
 int main(void)
 {
+	struct mainValues
+	{
+		int blinkingSpeed; ///to be read from EEPROM
+		int bitmask;
+	}eepromSpeedBitmaskMain;
 	
-	int bitmaskMain = init();
-	
+	eepromSpeedBitmaskMain = init();
     while(1)
     {
+
 		//LED::blink(bitmask, 2, 'n');
 		//_delay_ms(1000);
-		LED::blinkNormal(bitmaskMain, 3, 'y');
+		LED::blinkNormal(eepromSpeedBitmaskMain.bitmask, 3, 'y', eepromSpeedBitmaskMain.blinkingSpeed);
 		
     }
 

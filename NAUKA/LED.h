@@ -22,15 +22,15 @@
 namespace LED
 {
 	
-void blink(int bitMask, int howMuchBlink, char willStop)
-{
-	int actualBlink = 0;
+void blink(int bitMask, int howMuchBlink, char willStop, int eepromSpeed)
+}
+		int actualBlink = 0;
 		while(true)
 		{
 		PORTC = bitMask; //0b00000001;
-		_delay_ms(1000);
+		_delay_ms(eepromSpeed);
 		PORTC = (bitMask<<1); //0b00000010;
-		_delay_ms(1000);
+		_delay_ms(eepromSpeed);
 		actualBlink++;
 		if(actualBlink == howMuchBlink)
 		{
@@ -69,15 +69,15 @@ void blink(int bitMask, int howMuchBlink, char willStop)
 *
 */
 
-void blinkNormal(int bitMask, int howMuchBlink, char willStop)
+void blinkNormal(int bitMask, int howMuchBlink, char willStop, int eepromSpeed)
 {
 	int actualBlink = 0;
 	while(true)
 	{
 		PORTC = bitMask + 2;
-		_delay_ms(1000);
+		_delay_ms(eepromSpeed);
 		PORTC = !bitMask;
-		_delay_ms(1000);
+		_delay_ms(eepromSpeed);
 		actualBlink++;
 
 			if(actualBlink == howMuchBlink)
@@ -159,6 +159,26 @@ void lightOne(int withDiode, int startingBitmask, int howMuchWillBlink, char wil
 void stopBlinking()
 {
 	PORTC = 0x0;
+}
+/*
+
+Method will stop blinking desired led
+If parameter is > 2, all leds will be 
+*/
+void stopBlinkingOneLed(int withLed)
+{
+	if(withLed == 1)
+	{
+		PORTC = 0b00000010;
+	}
+	else if(withLed == 2)
+	{
+		PORTC = 0b00000001;
+	}
+	else
+	{
+		PORTC = 0x0;
+	}
 }
 }
 #endif /* LED_H_ */
