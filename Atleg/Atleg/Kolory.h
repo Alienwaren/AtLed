@@ -8,5 +8,7 @@ namespace Kolory
 	*/
 	sf::Color czerwony(255,0,0);
 
+	sf::Color zielony(0,255,0);
+
 }
 #endif //H_KOLORY

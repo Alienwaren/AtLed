@@ -20,13 +20,33 @@ namespace LED
 		wystapilaKolizjaKola = wystapilaKolizja;
 		return wystapilaKolizjaKola;
 	}
-	bool CALed::sprawdzOtrzymanaKolizje()
+	bool CALed::sprawdzOtrzymanaKolizje(bool byloKlikniecie)
 	{
-		if(wystapilaKolizjaKola == true)
+		if(/*wystapilaKolizjaKola == true && */byloKlikniecie == true)
 		{
-			kolorLed = sf::Color(sf::Color(0,255,0));
-			return true;
+			sf::Color aktualnyKolor = kolo.getFillColor();
+			if(aktualnyKolor == sf::Color(255,0,0))
+			{
+				kolorLed = sf::Color(sf::Color(255,225,225));
+				kolo.setFillColor(kolorLed);
+				return true;
+
+			}else if(aktualnyKolor == sf::Color(255,0,0))
+			{
+				kolorLed = sf::Color(255,0,0);
+				kolo.setFillColor(kolorLed);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
+		else
+		{
+			return false;
+		}
+		return false;
 		
 	}
 	void CALed::narysujKolo(sf::RenderWindow &oknoRenderu)

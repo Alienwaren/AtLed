@@ -9,11 +9,14 @@ namespace Mouse
 	class CAMouse
 	{
 		public:
-			CAMouse(void);
-			~CAMouse(void);
-			void static wyswietlKoordynaty();
-			void static pobierzKoordynatyMyszy(sf::RenderWindow &renderWindow);
-			sf::Vector2i static koordynatyMyszy;
+				CAMouse(void);
+				~CAMouse(void);
+				void static wyswietlKoordynaty();
+				void static pobierzKoordynatyMyszy(sf::RenderWindow &renderWindow);
+				static bool sprawdzCzyByloKlikniecie();
+			private:
+				static bool byloKlikniecie;
+				sf::Vector2i static koordynatyMyszy;
 	};
 }
 #endif //H_CAMOUSE

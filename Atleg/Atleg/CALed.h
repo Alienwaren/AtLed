@@ -15,7 +15,7 @@ namespace LED
 			CALed(int rozmiarLedu, sf::Color kolorKola); //konstruktor pozwalaj¹cy na zmiane koloru i rozmiaru ko³a
 			void narysujKolo(sf::RenderWindow &oknoRenderu);
 			bool otrzymajKolizje(bool wystapilaKolizja);
-			bool sprawdzOtrzymanaKolizje();
+			bool sprawdzOtrzymanaKolizje(bool byloKlikniecie);
 			void zmienKolorKola();
 			~CALed(void);
 		protected:

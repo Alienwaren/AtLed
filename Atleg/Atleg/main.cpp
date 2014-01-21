@@ -8,6 +8,8 @@ int main()
 {
 	LED::CALed led1(50, Kolory::czerwony);
     sf::RenderWindow window(sf::VideoMode(800, 600), "TEST");
+	window.setKeyRepeatEnabled(false);
+	window.setFramerateLimit(60);
 	while (window.isOpen())
     {
 		Mouse::CAMouse::pobierzKoordynatyMyszy(window);
@@ -17,8 +19,9 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+			led1.sprawdzOtrzymanaKolizje(Mouse::CAMouse::sprawdzCzyByloKlikniecie());
 		}
-		led1.sprawdzOtrzymanaKolizje();
+		
         window.clear();
 		led1.narysujKolo(window);
         window.display();
