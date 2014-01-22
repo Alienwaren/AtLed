@@ -53,6 +53,12 @@ namespace LED
 	{
 		oknoRenderu.draw(kolo);
 	}
+	sf::Vector2f CALed::pobierzKoordynatyLedu()
+	{
+		koordynatyLed = kolo.getPosition();
+		std::cout << koordynatyLed.x << " " << koordynatyLed.y << std::endl;
+		return koordynatyLed;
+	}
 	CALed::~CALed(void)
 	{
 	}

@@ -4,6 +4,7 @@
 #include <SFML\System.hpp>
 #include <iostream>
 #include "CALed.h"
+#include <vector>
 namespace Mouse
 {
 	class CAMouse
@@ -14,7 +15,8 @@ namespace Mouse
 				void static wyswietlKoordynaty();
 				void static pobierzKoordynatyMyszy(sf::RenderWindow &renderWindow);
 				static bool sprawdzCzyByloKlikniecie();
-			private:
+				static bool czyBylaKolizja(sf::Vector2f koordynatyDoSprawdzenia, sf::Event &petlaZdarzen, sf::RenderWindow &oknoDoSprawdzenia);
+		private:
 				static bool byloKlikniecie;
 				sf::Vector2i static koordynatyMyszy;
 	};
