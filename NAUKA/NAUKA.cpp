@@ -19,9 +19,9 @@ int init()
 	{
 		int blinkingSpeed; ///to be read from EEPROM
 		int bitmask; 
-	}eepromSpeedBitmask;
-	eepromSpeedDataC.blinkingSpeed = getBlinkingSpeed();
-	eepromSpeedDataC.Bitmask = 0b00000001;
+	}eepromSpeedDataC;
+	eepromSpeedDataC.blinkingSpeed = EEPROM::getBlinkingSpeed();
+	eepromSpeedDataC.bitmask = 0b00000001;
 	DDRC = 0b11111111;
 	return eepromSpeedDataC;
 }

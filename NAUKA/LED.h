@@ -23,7 +23,7 @@ namespace LED
 {
 	
 void blink(int bitMask, int howMuchBlink, char willStop, int eepromSpeed)
-}
+{
 		int actualBlink = 0;
 		while(true)
 		{
@@ -129,7 +129,7 @@ void lightOne(int withDiode, int startingBitmask, int howMuchWillBlink, char wil
 			PORTC = 0x0;
 		}
 
-			if(actualBlink == howMuchBlink)
+			if(actualBlink == howMuchWillBlink)
 			{
 				if(willStop == 'Y' || willStop == 'y')
 				{
@@ -151,6 +151,7 @@ void lightOne(int withDiode, int startingBitmask, int howMuchWillBlink, char wil
 				}
 			
 }
+		}
 /*
 *Method will stop led blinking
 *

@@ -9,7 +9,7 @@
 #define EEPROM_H_
 #include <avr/eeprom.h>
 #include <avr/io.h>
-#include <avr/ctype.h>
+#include "ctype.h"
 namespace EEPROM
 {
 	int EEMEM initialSpeed = 1;
