@@ -3,29 +3,31 @@ timer.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000008e  00000000  00000000  00000074  2**1
+  0 .text         000000a2  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  0000008e  00000102  2**0
+  1 .data         00000000  00800060  000000a2  00000116  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .stab         000006cc  00000000  00000000  00000104  2**2
+  2 .stab         000006cc  00000000  00000000  00000118  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      00000097  00000000  00000000  000007d0  2**0
+  3 .stabstr      00000097  00000000  00000000  000007e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .comment      0000002f  00000000  00000000  00000867  2**0
+  4 .comment      0000002f  00000000  00000000  0000087b  2**0
                   CONTENTS, READONLY
-  5 .debug_aranges 00000020  00000000  00000000  00000896  2**0
+  5 .debug_aranges 00000020  00000000  00000000  000008aa  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000007b  00000000  00000000  000008b6  2**0
+  6 .debug_info   00000095  00000000  00000000  000008ca  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000044  00000000  00000000  00000931  2**0
+  7 .debug_abbrev 0000005c  00000000  00000000  0000095f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000042  00000000  00000000  00000975  2**0
+  8 .debug_line   0000004a  00000000  00000000  000009bb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000024  00000000  00000000  000009b8  2**2
+  9 .debug_frame  00000024  00000000  00000000  00000a08  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000096  00000000  00000000  000009dc  2**0
+ 10 .debug_str    0000009c  00000000  00000000  00000a2c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000010  00000000  00000000  00000a72  2**0
+ 11 .debug_loc    00000024  00000000  00000000  00000ac8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000010  00000000  00000000  00000aec  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -61,7 +63,7 @@ Disassembly of section .text:
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
   60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
-  64:	0c 94 45 00 	jmp	0x8a	; 0x8a <_exit>
+  64:	0c 94 4f 00 	jmp	0x9e	; 0x9e <_exit>
 
 00000068 <__bad_interrupt>:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -80,35 +82,53 @@ int main (void)
   70:	83 b7       	in	r24, 0x33	; 51
   72:	85 60       	ori	r24, 0x05	; 5
   74:	83 bf       	out	0x33, r24	; 51
-	for (;;)
-	{
-		// Check timer value in if statement, true when count matches 1/20 of a second
-		if (TCNT0 >= 224)
-		{
-			PORTC ^= (1 << 0); // Toggle the LED
-  76:	91 e0       	ldi	r25, 0x01	; 1
+	int iloscPrzerwan = 0;
+  76:	80 e0       	ldi	r24, 0x00	; 0
+  78:	90 e0       	ldi	r25, 0x00	; 0
+			if(iloscPrzerwan == 76)
+			{
+				PORTC ^= (1<<0);	
+			}else
+			{
+				PORTC ^= (1>>0);	
+  7a:	31 e0       	ldi	r19, 0x01	; 1
 	TCCR0 |= (1<<CS02) | (1<<CS00); // Set up timer
-	
+	int iloscPrzerwan = 0;
 	for (;;)
 	{
-		// Check timer value in if statement, true when count matches 1/20 of a second
-		if (TCNT0 >= 224)
-  78:	82 b7       	in	r24, 0x32	; 50
-  7a:	80 3e       	cpi	r24, 0xE0	; 224
-  7c:	e8 f3       	brcs	.-6      	; 0x78 <main+0xc>
-		{
-			PORTC ^= (1 << 0); // Toggle the LED
-  7e:	85 b3       	in	r24, 0x15	; 21
-  80:	89 27       	eor	r24, r25
-  82:	85 bb       	out	0x15, r24	; 21
+			// Check timer value in if statement, true when count matches 1/20 of a second
+			if (TCNT0 >= 224)
+  7c:	22 b7       	in	r18, 0x32	; 50
+  7e:	20 3e       	cpi	r18, 0xE0	; 224
+  80:	18 f0       	brcs	.+6      	; 0x88 <main+0x1c>
+			{
+				//PORTC ^= (1 << 0); // Toggle the LED
+				TCNT1 = 0; // Reset timer value
+  82:	1d bc       	out	0x2d, r1	; 45
+  84:	1c bc       	out	0x2c, r1	; 44
+			iloscPrzerwan++;
+  86:	01 96       	adiw	r24, 0x01	; 1
+			}
+			if(iloscPrzerwan == 76)
+  88:	8c 34       	cpi	r24, 0x4C	; 76
+  8a:	91 05       	cpc	r25, r1
+  8c:	21 f4       	brne	.+8      	; 0x96 <main+0x2a>
+			{
+				PORTC ^= (1<<0);	
+  8e:	25 b3       	in	r18, 0x15	; 21
+  90:	23 27       	eor	r18, r19
+  92:	25 bb       	out	0x15, r18	; 21
+  94:	f3 cf       	rjmp	.-26     	; 0x7c <main+0x10>
+			}else
+			{
+				PORTC ^= (1>>0);	
+  96:	25 b3       	in	r18, 0x15	; 21
+  98:	23 27       	eor	r18, r19
+  9a:	25 bb       	out	0x15, r18	; 21
+  9c:	ef cf       	rjmp	.-34     	; 0x7c <main+0x10>
 
-			TCNT1 = 0; // Reset timer value
-  84:	1d bc       	out	0x2d, r1	; 45
-  86:	1c bc       	out	0x2c, r1	; 44
-  88:	f7 cf       	rjmp	.-18     	; 0x78 <main+0xc>
+0000009e <_exit>:
+  9e:	f8 94       	cli
 
-0000008a <_exit>:
-  8a:	f8 94       	cli
-
-0000008c <__stop_program>:
-  8c:	ff cf       	rjmp	.-2      	; 0x8c <__stop_program>
+000000a0 <__stop_program>:
+  a0:	ff cf       	rjmp	.-2      	; 0xa0 <__stop_program>
